@@ -155,14 +155,30 @@ const Index = () => {
             <div className="flex-1">
               <CategoryFilter onFilterChange={setFilter} />
             </div>
-            {isMobile && (
-              <button
-                onClick={() => setViewMode("fullscreen")}
-                className="px-3 py-2 bg-secondary text-secondary-foreground text-xs rounded-lg font-body"
-              >
-                Fullscreen
-              </button>
-            )}
+            <div className="flex items-center gap-2">
+              {user && (
+                <button
+                  onClick={() => setPersonalizedMode(!personalizedMode)}
+                  className={`px-3 py-2 text-xs rounded-lg font-body flex items-center gap-1.5 transition-colors ${
+                    personalizedMode
+                      ? "bg-oracle text-oracle-foreground"
+                      : "bg-secondary text-secondary-foreground"
+                  }`}
+                  title="Filter by your preferred categories and traditions"
+                >
+                  <User className="w-3.5 h-3.5" />
+                  For You
+                </button>
+              )}
+              {isMobile && (
+                <button
+                  onClick={() => setViewMode("fullscreen")}
+                  className="px-3 py-2 bg-secondary text-secondary-foreground text-xs rounded-lg font-body"
+                >
+                  Fullscreen
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="space-y-6">
