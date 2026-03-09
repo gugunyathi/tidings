@@ -1,14 +1,20 @@
 import { Flame, Eye } from "lucide-react";
+import UserMenu from "@/components/UserMenu";
 
 const TidingsHeader = () => {
   return (
-    <header className="relative py-8 md:py-12 text-center space-y-4">
+    <header className="relative py-8 md:py-12 space-y-4">
       {/* Ambient glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-96 h-96 rounded-full bg-primary/5 blur-3xl animate-pulse-glow" />
       </div>
 
       <div className="relative z-10 space-y-4">
+        {/* Top bar with user menu */}
+        <div className="flex items-center justify-end">
+          <UserMenu />
+        </div>
+
         <div className="flex items-center justify-center gap-3">
           <Flame className="w-6 h-6 text-primary animate-pulse-glow" />
           <h1 className="font-display text-4xl md:text-6xl font-bold text-gradient-gold tracking-wide">
@@ -17,7 +23,7 @@ const TidingsHeader = () => {
           <Flame className="w-6 h-6 text-primary animate-pulse-glow" />
         </div>
 
-        <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto font-body leading-relaxed">
+        <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto font-body leading-relaxed text-center">
           Where ancient prophecy meets modern events. A multi-faith lens on the patterns shaping our world.
         </p>
 
