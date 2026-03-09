@@ -191,11 +191,7 @@ const Index = () => {
               <div
                 key={tiding.id}
                 onClick={() => {
-                  if (tiding.id.startsWith("ai-")) {
-                    toast.info("AI tidings don't have detail pages yet");
-                  } else {
-                    navigate(`/tiding/${tiding.id}`);
-                  }
+                  navigate(`/tiding/${tiding.id}`, { state: { tiding } });
                 }}
                 className="cursor-pointer"
               >

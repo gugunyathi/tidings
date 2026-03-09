@@ -1,17 +1,23 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Eye, TrendingUp, BookOpen, Play, Pause, Volume2, ScrollText, BrainCircuit, Link2, ChevronRight } from "lucide-react";
-import { useState, useRef } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { ArrowLeft, Eye, TrendingUp, BookOpen, Play, Pause, Volume2, ScrollText, BrainCircuit, Link2, ChevronRight, Sparkles } from "lucide-react";
+import { useState } from "react";
 import { TIDINGS_DATA } from "@/data/tidings";
+import { BasePayButton } from "@base-org/account-ui/react";
+import { useBasePay } from "@/hooks/useBasePay";
+import { toast } from "sonner";
 
 const TidingDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeScriptStep, setActiveScriptStep] = useState(0);
 
-  const tiding = TIDINGS_DATA.find((t) => t.id === id);
+  const foundTiding = TIDINGS_DATA.find((t) => t.id === id);
+  const stateTiding = (location.state as { tiding?: any })?.tiding;
+  const rawTiding = foundTiding ?? stateTiding;
 
-  if (!tiding) {
+  if (!rawTiding) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
@@ -24,27 +30,55 @@ const TidingDetail = () => {
     );
   }
 
+  // Normalise AI tidings that lack the extended fields
+  const tiding = {
+    videoScript: [] as { time: string; visual: string; audio: string }[],
+    expandedAnalysis: "",
+    deepSources: [] as { tradition: string; reference: string; excerpt: string; context: string }[],
+    relatedTidings: [] as string[],
+    agentNotes: rawTiding.agentNote ? [rawTiding.agentNote] : [],
+    ...rawTiding,
+  };
+
   const probabilityColor =
     tiding.probability >= 70 ? "text-probability-high" : tiding.probability >= 40 ? "text-probability-mid" : "text-probability-low";
   const probabilityBg =
     tiding.probability >= 70 ? "bg-probability-high" : tiding.probability >= 40 ? "bg-probability-mid" : "bg-probability-low";
 
   const relatedTidings = TIDINGS_DATA.filter((t) => tiding.relatedTidings.includes(t.id));
+  const { status: payStatus, triggerPayment, reset: resetPay } = useBasePay();
+
+  const handlePayment = async () => {
+    const result = await triggerPayment("1.00", false);
+    if (result?.status === "completed") {
+      toast.success("Thank you for supporting the Oracle ⚡");
+    } else if (result === null) {
+      toast.error("Payment cancelled or failed");
+    }
+    setTimeout(resetPay, 3000);
+  };
 
   const handlePlayToggle = () => {
     setIsPlaying(!isPlaying);
     if (!isPlaying) {
-      let step = 0;
-      const interval = setInterval(() => {
-        step++;
-        if (step >= tiding.videoScript.length) {
-          clearInterval(interval);
+      if (tiding.videoScript.length === 0) {
+        // AI tiding: just play the voiceover for ~10 seconds then stop
+        setTimeout(() => {
           setIsPlaying(false);
-          setActiveScriptStep(0);
-        } else {
-          setActiveScriptStep(step);
-        }
-      }, 3300);
+        }, 10000);
+      } else {
+        let step = 0;
+        const interval = setInterval(() => {
+          step++;
+          if (step >= tiding.videoScript.length) {
+            clearInterval(interval);
+            setIsPlaying(false);
+            setActiveScriptStep(0);
+          } else {
+            setActiveScriptStep(step);
+          }
+        }, 3300);
+      }
     }
   };
 
@@ -122,6 +156,7 @@ const TidingDetail = () => {
         </p>
 
         {/* Video Script Timeline */}
+        {tiding.videoScript.length > 0 && (
         <section className="space-y-4">
           <div className="flex items-center gap-2 text-primary font-display text-sm uppercase tracking-widest">
             <Volume2 className="w-4 h-4" />
@@ -150,8 +185,10 @@ const TidingDetail = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* Expanded Oracle Analysis */}
+        {tiding.expandedAnalysis && (
         <section className="space-y-4">
           <div className="flex items-center gap-2 text-oracle font-display text-sm uppercase tracking-widest">
             <BrainCircuit className="w-4 h-4" />
@@ -165,6 +202,7 @@ const TidingDetail = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* Probability Gauge */}
         <section className="space-y-4">
@@ -190,6 +228,7 @@ const TidingDetail = () => {
         </section>
 
         {/* Deep Source Citations */}
+        {tiding.deepSources.length > 0 ? (
         <section className="space-y-4">
           <div className="flex items-center gap-2 text-prophecy font-display text-sm uppercase tracking-widest">
             <ScrollText className="w-4 h-4" />
@@ -216,6 +255,22 @@ const TidingDetail = () => {
             ))}
           </div>
         </section>
+        ) : tiding.sources?.length > 0 && (
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 text-prophecy font-display text-sm uppercase tracking-widest">
+            <ScrollText className="w-4 h-4" />
+            Source Citations
+          </div>
+          <div className="space-y-3">
+            {tiding.sources.map((source, i) => (
+              <div key={i} className="border border-border rounded-lg p-4 bg-gradient-card flex items-center justify-between">
+                <span className="text-xs font-semibold uppercase tracking-widest text-primary font-body">{source.tradition}</span>
+                <span className="text-xs text-muted-foreground font-body">{source.reference}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        )}
 
         {/* Prediction Market */}
         <section className="space-y-4">
@@ -237,6 +292,7 @@ const TidingDetail = () => {
         </section>
 
         {/* Agent Notes */}
+        {tiding.agentNotes.length > 0 && (
         <section className="space-y-4">
           <div className="flex items-center gap-2 text-muted-foreground font-display text-sm uppercase tracking-widest">
             <BookOpen className="w-4 h-4" />
@@ -249,6 +305,32 @@ const TidingDetail = () => {
                 <p className="text-xs text-muted-foreground leading-relaxed font-body">{note}</p>
               </div>
             ))}
+          </div>
+        </section>
+        )}
+
+        {/* Support the Oracle */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 text-primary font-display text-sm uppercase tracking-widest">
+            <Sparkles className="w-4 h-4" />
+            Support the Oracle
+          </div>
+          <div className="border border-primary/20 rounded-lg p-6 bg-gradient-card flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-foreground font-body font-medium">Fund the Watchman Agent</p>
+              <p className="text-xs text-muted-foreground font-body mt-1">
+                1 USDC keeps the Oracle running. Settle instantly on Base.
+              </p>
+              {payStatus === "completed" && (
+                <p className="text-xs text-probability-high font-body mt-1">⚡ Payment confirmed — thank you</p>
+              )}
+              {payStatus === "failed" && (
+                <p className="text-xs text-destructive font-body mt-1">Payment failed. Please try again.</p>
+              )}
+            </div>
+            <div className={payStatus === "pending" ? "opacity-60 pointer-events-none" : ""}>
+              <BasePayButton colorScheme="dark" onClick={handlePayment} />
+            </div>
           </div>
         </section>
 
