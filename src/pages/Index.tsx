@@ -1,13 +1,15 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { useAuth } from "@/contexts/AuthContext";
 import TidingsHeader from "@/components/TidingsHeader";
 import TidingCard from "@/components/TidingCard";
 import FullscreenTidingCard from "@/components/FullscreenTidingCard";
 import CategoryFilter from "@/components/CategoryFilter";
 import { TIDINGS_DATA, type TidingDetail } from "@/data/tidings";
 import { supabase } from "@/integrations/supabase/client";
-import { Sparkles, Loader2, ArrowLeft } from "lucide-react";
+import { Sparkles, Loader2, ArrowLeft, User } from "lucide-react";
 import { toast } from "sonner";
 import type { TidingData } from "@/components/TidingCard";
 import tidingDefault from "@/assets/tiding-default.jpg";
@@ -20,15 +22,48 @@ const Index = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [viewMode, setViewMode] = useState<"feed" | "fullscreen">("feed");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [personalizedMode, setPersonalizedMode] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { user } = useAuth();
+  const { preferences } = useUserPreferences();
 
   const allTidings: (TidingDetail | AiTiding)[] = [
     ...aiTidings,
     ...TIDINGS_DATA,
   ];
-  const filtered = filter === "all" ? allTidings : allTidings.filter((t) => t.category === filter);
+
+  // Apply personalized filtering based on user preferences
+  const filtered = useMemo(() => {
+    let result = allTidings;
+
+    // Apply category filter from UI
+    if (filter !== "all") {
+      result = result.filter((t) => t.category === filter);
+    }
+
+    // Apply personalized preferences when enabled
+    if (personalizedMode && preferences) {
+      const { preferred_categories, preferred_traditions } = preferences;
+      const hasCategories = preferred_categories.length > 0 && !preferred_categories.includes("all");
+      const hasTraditions = preferred_traditions.length > 0 && !preferred_traditions.includes("all");
+
+      if (hasCategories || hasTraditions) {
+        result = result.filter((t) => {
+          const categoryMatch = !hasCategories || preferred_categories.includes(t.category);
+          const traditionMatch = !hasTraditions || t.sources.some((s) => 
+            preferred_traditions.some((pref) => 
+              s.tradition.toLowerCase().includes(pref.toLowerCase())
+            )
+          );
+          return categoryMatch || traditionMatch;
+        });
+      }
+    }
+
+    return result;
+  }, [allTidings, filter, personalizedMode, preferences]);
 
   const generateTiding = async () => {
     setIsGenerating(true);
@@ -120,14 +155,30 @@ const Index = () => {
             <div className="flex-1">
               <CategoryFilter onFilterChange={setFilter} />
             </div>
-            {isMobile && (
-              <button
-                onClick={() => setViewMode("fullscreen")}
-                className="px-3 py-2 bg-secondary text-secondary-foreground text-xs rounded-lg font-body"
-              >
-                Fullscreen
-              </button>
-            )}
+            <div className="flex items-center gap-2">
+              {user && (
+                <button
+                  onClick={() => setPersonalizedMode(!personalizedMode)}
+                  className={`px-3 py-2 text-xs rounded-lg font-body flex items-center gap-1.5 transition-colors ${
+                    personalizedMode
+                      ? "bg-oracle text-oracle-foreground"
+                      : "bg-secondary text-secondary-foreground"
+                  }`}
+                  title="Filter by your preferred categories and traditions"
+                >
+                  <User className="w-3.5 h-3.5" />
+                  For You
+                </button>
+              )}
+              {isMobile && (
+                <button
+                  onClick={() => setViewMode("fullscreen")}
+                  className="px-3 py-2 bg-secondary text-secondary-foreground text-xs rounded-lg font-body"
+                >
+                  Fullscreen
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="space-y-6">
@@ -149,7 +200,19 @@ const Index = () => {
           </div>
           {filtered.length === 0 && (
             <div className="text-center py-20 text-muted-foreground font-body">
-              No tidings found for this category.
+              {personalizedMode ? (
+                <div className="space-y-2">
+                  <p>No tidings match your preferences.</p>
+                  <button
+                    onClick={() => navigate("/settings")}
+                    className="text-oracle underline hover:no-underline"
+                  >
+                    Update your preferences
+                  </button>
+                </div>
+              ) : (
+                "No tidings found for this category."
+              )}
             </div>
           )}
         </div>
