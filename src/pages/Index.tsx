@@ -200,7 +200,19 @@ const Index = () => {
           </div>
           {filtered.length === 0 && (
             <div className="text-center py-20 text-muted-foreground font-body">
-              No tidings found for this category.
+              {personalizedMode ? (
+                <div className="space-y-2">
+                  <p>No tidings match your preferences.</p>
+                  <button
+                    onClick={() => navigate("/settings")}
+                    className="text-oracle underline hover:no-underline"
+                  >
+                    Update your preferences
+                  </button>
+                </div>
+              ) : (
+                "No tidings found for this category."
+              )}
             </div>
           )}
         </div>
