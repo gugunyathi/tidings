@@ -13,11 +13,11 @@ const TidingsHeader = () => {
         {/* Top bar: logo left, user menu right */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Flame className="w-4 h-4 text-primary animate-pulse-glow flex-shrink-0" />
-            <h1 className="font-display text-xl md:text-2xl font-bold text-gradient-gold tracking-wide leading-none">
+            <Flame className="w-4 h-4 text-blue-200 animate-pulse-glow flex-shrink-0 drop-shadow-[0_0_8px_rgba(165,220,255,0.8)]" />
+            <h1 className="font-display text-xl md:text-2xl font-bold text-white tracking-wide leading-none drop-shadow-[0_0_10px_rgba(165,220,255,0.8)] animate-pulse-glow">
               TIDINGS
             </h1>
-            <Flame className="w-4 h-4 text-primary animate-pulse-glow flex-shrink-0" />
+            <Flame className="w-4 h-4 text-blue-200 animate-pulse-glow flex-shrink-0 drop-shadow-[0_0_8px_rgba(165,220,255,0.8)]" />
           </div>
           <UserMenu />
         </div>
