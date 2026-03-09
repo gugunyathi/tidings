@@ -1,4 +1,8 @@
-import { Eye, TrendingUp, BookOpen, Play } from "lucide-react";
+import { Eye, TrendingUp, BookOpen, Play, Bookmark } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useSavedTidings } from "@/hooks/useSavedTidings";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface ProbabilityBadgeProps {
   score: number;
@@ -37,6 +41,23 @@ interface TidingCardProps {
 }
 
 const TidingCard = ({ tiding }: TidingCardProps) => {
+  const { user } = useAuth();
+  const { isSaved, toggleSave } = useSavedTidings();
+  const navigate = useNavigate();
+  const saved = isSaved(tiding.id);
+
+  const handleSave = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
+    const success = await toggleSave(tiding.id);
+    if (success) {
+      toast.success(saved ? "Tiding removed from saved" : "Tiding saved");
+    }
+  };
+
   return (
     <article className="bg-gradient-card rounded-lg overflow-hidden border border-border hover:shadow-glow transition-all duration-500 group">
       {/* Vision Image */}
@@ -63,16 +84,27 @@ const TidingCard = ({ tiding }: TidingCardProps) => {
         </div>
 
         {/* Probability badge */}
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 flex items-center gap-2">
           <ProbabilityBadge score={tiding.probability} />
         </div>
       </div>
 
       {/* The Scroll - Text Content */}
       <div className="p-6 space-y-4">
-        <h2 className="font-display text-xl md:text-2xl font-bold text-foreground leading-tight">
-          {tiding.title}
-        </h2>
+        <div className="flex items-start justify-between gap-3">
+          <h2 className="font-display text-xl md:text-2xl font-bold text-foreground leading-tight">
+            {tiding.title}
+          </h2>
+          <button
+            onClick={handleSave}
+            className={`flex-shrink-0 p-2 rounded-full transition-colors ${
+              saved ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+            }`}
+            title={saved ? "Unsave" : "Save"}
+          >
+            <Bookmark className={`w-4 h-4 ${saved ? "fill-current" : ""}`} />
+          </button>
+        </div>
         
         <p className="text-muted-foreground text-sm leading-relaxed font-body">
           {tiding.summary}
