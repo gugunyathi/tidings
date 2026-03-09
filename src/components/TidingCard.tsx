@@ -28,6 +28,7 @@ export interface TidingData {
   title: string;
   summary: string;
   image: string;
+  videoUrl?: string; // Add optional video support
   probability: number;
   sources: TidingSource[];
   marketQuestion: string;

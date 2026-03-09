@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import type { TidingData } from "@/components/TidingCard";
 
 interface FullscreenTidingCardProps {
-  tiding: TidingData & { voiceover?: string; headline?: string };
+  tiding: TidingData & { voiceover?: string; headline?: string; videoUrl?: string };
   index: number;
   total: number;
   onNavigateUp?: () => void;
@@ -46,13 +46,24 @@ const FullscreenTidingCard = ({ tiding, index, total, onNavigateUp, onNavigateDo
 
   return (
     <div className="h-full w-full flex flex-col relative">
-      {/* Background Image */}
+      {/* Background Image / Video */}
       <div className="absolute inset-0">
-        <img
-          src={tiding.image}
-          alt={tiding.title}
-          className="w-full h-full object-cover"
-        />
+        {tiding.videoUrl ? (
+          <video
+            src={tiding.videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <img
+            src={tiding.image}
+            alt={tiding.title}
+            className="w-full h-full object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
       </div>
 

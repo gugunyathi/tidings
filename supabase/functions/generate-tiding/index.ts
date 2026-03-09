@@ -48,12 +48,13 @@ Return ONLY a valid JSON object with this exact structure:
   "marketQuestion": "Prediction market question about whether this event will escalate (future-tense)",
   "marketOdds": {"yes": 60, "no": 40},
   "voiceover": "10-second cinematic voiceover script (2 sentences max, dramatic)",
-  "imagePrompt": "Detailed cinematic image prompt for AI image generation: 'Biblical Epic meets Near-Future Tech 2026 aesthetic. 4K, dramatic lighting, [specific scene]'",
+  "imagePrompt": "Detailed cinematic image prompt for AI image generation...",
+  "videoPrompt": "Detailed prompt for generating a TikTok style vertical looping video in Gemini Veo...",
   "agentNote": "One sentence from the Synthesizer Agent about the pattern detected"
 }
 
 The probability should reflect genuine cross-tradition consensus (20-95 range).
-The imagePrompt must be very specific and cinematic — something that could be used for Midjourney or Imagen.
+The videoPrompt must be very specific for a vertical (9:16) short form video.
 Base this on a REAL news event happening in ${dateStr}.`;
 
     const userMessage = userHint
@@ -115,6 +116,11 @@ Base this on a REAL news event happening in ${dateStr}.`;
     tiding.probability = clampProbability(tiding.probability ?? 50);
     tiding.id = `ai-${Date.now()}`;
     tiding.timestamp = `${dateStr} · Synthesizer Agent`;
+
+    // Simulate Google GenAI Video Generation Endpoint (Veo)
+    // In a real production deployment, you would call https://generativelanguage.googleapis.com/...
+    // and wait for the LRO (long-running operation) to complete.
+    tiding.videoUrl = "https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4";
 
     // Ensure marketOdds sums to 100
     if (tiding.marketOdds) {
