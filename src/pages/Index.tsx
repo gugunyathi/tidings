@@ -7,9 +7,10 @@ import FullscreenTidingCard from "@/components/FullscreenTidingCard";
 import CategoryFilter from "@/components/CategoryFilter";
 import { TIDINGS_DATA, type TidingDetail } from "@/data/tidings";
 import { supabase } from "@/integrations/supabase/client";
-import { Sparkles, Loader2, X, ArrowLeft } from "lucide-react";
+import { Sparkles, Loader2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import type { TidingData } from "@/components/TidingCard";
+import tidingDefault from "@/assets/tiding-default.jpg";
 
 type AiTiding = TidingData & { voiceover?: string; headline?: string; imagePrompt?: string };
 
