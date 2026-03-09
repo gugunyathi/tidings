@@ -122,7 +122,7 @@ const Index = () => {
     <div className="fixed inset-0 bg-background z-50">
       {/* Header overlay */}
       <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between p-4 bg-gradient-to-b from-background/80 to-transparent">
-        <h1 className="font-display text-2xl font-bold text-gradient-gold">TIDINGS</h1>
+        <h1 className="font-display text-2xl font-bold text-gradient-gold tracking-wide drop-shadow-[0_0_12px_rgba(255,215,0,0.7)] animate-pulse-glow">TIDINGS</h1>
         <div className="flex items-center">
           <UserMenu />
         </div>
