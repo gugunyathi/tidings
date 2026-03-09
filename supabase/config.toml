@@ -1,1 +1,4 @@
 project_id = "amcpgpnsjjvnlcvbilxf"
+
+[functions.generate-tiding]
+verify_jwt = false
