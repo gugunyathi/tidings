@@ -4,6 +4,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { useAuth } from "@/contexts/AuthContext";
 import TidingsHeader from "@/components/TidingsHeader";
+import UserMenu from "@/components/UserMenu";
 import TidingCard from "@/components/TidingCard";
 import FullscreenTidingCard from "@/components/FullscreenTidingCard";
 import CategoryFilter from "@/components/CategoryFilter";
@@ -121,15 +122,10 @@ const Index = () => {
     <div className="fixed inset-0 bg-background z-50">
       {/* Header overlay */}
       <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between p-4 bg-gradient-to-b from-background/80 to-transparent">
-        <div className="w-9" /> {/* Spacer to align title */}
-        <h1 className="font-display text-lg font-bold text-gradient-gold">TIDINGS</h1>
-        <button
-          onClick={generateTiding}
-          disabled={isGenerating}
-          className="p-2 rounded-full bg-oracle/80 backdrop-blur-sm text-oracle-foreground"
-        >
-          {isGenerating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-        </button>
+        <h1 className="font-display text-2xl font-bold text-gradient-gold">TIDINGS</h1>
+        <div className="flex items-center">
+          <UserMenu />
+        </div>
       </div>
 
       {/* Filter pills */}
@@ -167,6 +163,18 @@ const Index = () => {
         <div className="bg-secondary/60 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-secondary-foreground font-body">
           {currentIndex + 1} / {filtered.length}
         </div>
+      </div>
+
+      {/* Floating Action Button (Generate) */}
+      <div className="absolute bottom-6 right-4 z-40">
+        <button
+          onClick={generateTiding}
+          disabled={isGenerating}
+          className="flex items-center justify-center rounded-full bg-oracle shadow-[0_0_15px_rgba(255,215,0,0.5)] text-oracle-foreground hover:bg-oracle/90 transition-transform hover:scale-105 active:scale-95 disabled:opacity-70"
+          style={{ width: "60px", height: "60px" }}
+        >
+          {isGenerating ? <Loader2 className="w-6 h-6 animate-spin" /> : <Sparkles className="w-6 h-6" />}
+        </button>
       </div>
     </div>
   );
