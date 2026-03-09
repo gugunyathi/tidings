@@ -159,7 +159,7 @@ const Index = () => {
               {user && (
                 <button
                   onClick={() => setPersonalizedMode(!personalizedMode)}
-                  className={`px-3 py-2 text-xs rounded-lg font-body flex items-center gap-1.5 transition-colors ${
+                  className={`px-3 py-2 text-xs rounded-lg font-body flex items-center gap-1.5 transition-colors relative ${
                     personalizedMode
                       ? "bg-oracle text-oracle-foreground"
                       : "bg-secondary text-secondary-foreground"
@@ -168,6 +168,11 @@ const Index = () => {
                 >
                   <User className="w-3.5 h-3.5" />
                   For You
+                  {personalizedMode && (
+                    <span className="bg-oracle-foreground/20 text-oracle-foreground px-1.5 py-0.5 rounded-full text-xs font-semibold ml-1">
+                      {filtered.length}
+                    </span>
+                  )}
                 </button>
               )}
               {isMobile && (
