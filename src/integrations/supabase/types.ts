@@ -14,7 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      notification_preferences: {
+        Row: {
+          email_market_alerts: boolean
+          email_new_tidings: boolean
+          id: string
+          preferred_categories: string[]
+          preferred_traditions: string[]
+          push_enabled: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          email_market_alerts?: boolean
+          email_new_tidings?: boolean
+          id?: string
+          preferred_categories?: string[]
+          preferred_traditions?: string[]
+          push_enabled?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          email_market_alerts?: boolean
+          email_new_tidings?: boolean
+          id?: string
+          preferred_categories?: string[]
+          preferred_traditions?: string[]
+          push_enabled?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_tidings: {
+        Row: {
+          id: string
+          saved_at: string
+          tiding_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          saved_at?: string
+          tiding_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          saved_at?: string
+          tiding_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
