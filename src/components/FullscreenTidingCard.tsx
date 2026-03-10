@@ -1,4 +1,5 @@
-import { Eye, TrendingUp, BookOpen, Play, Bookmark, ChevronUp, ChevronDown, Volume2 } from "lucide-react";
+import { Eye, TrendingUp, BookOpen, Play, Bookmark, ChevronUp, ChevronDown, Volume2, Share2, Coins } from "lucide-react";
+import sdk from '@farcaster/miniapp-sdk';
 import { useAuth } from "@/contexts/AuthContext";
 import { useSavedTidings } from "@/hooks/useSavedTidings";
 import { toast } from "sonner";
@@ -44,8 +45,27 @@ const FullscreenTidingCard = ({ tiding, index, total, onNavigateUp, onNavigateDo
     }
   };
 
+  const handleCast = () => {
+    const text = encodeURIComponent(`The Oracle has spoken... ${tiding.title} (${tiding.probability}% Probability)`);
+    const embedUrl = encodeURIComponent(`https://tidingsapp.vercel.app/tiding/${tiding.id}`);
+    sdk.actions.openUrl(`https://warpcast.com/~/compose?text=${text}&embeds[]=${embedUrl}`);
+  };
+
+  const handleBet = (type: 'yes' | 'no') => {
+    // Integrate with actual Polymarket/Base Pay
+    toast.success(`Redirecting to Base network to buy $5 of ${type.toUpperCase()}`);
+    if (navigator.vibrate) navigator.vibrate(50);
+  };
+
+  const handleTip = () => {
+    toast.success("Initiating 1 USDC Tip to the Oracle via Base...");
+    if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+  };
+
+  const isOmen = tiding.rarity === "Omen" || tiding.probability >= 90;
+
   return (
-    <div className="h-full w-full flex flex-col relative">
+    <div className={`h-full w-full flex flex-col relative ${isOmen ? 'animate-omen-glow shadow-[inset_0_0_100px_rgba(220,20,60,0.5)]' : ''}`}>
       {/* Background Image / Video */}
       <div className="absolute inset-0">
         {tiding.videoUrl ? (
@@ -92,13 +112,19 @@ const FullscreenTidingCard = ({ tiding, index, total, onNavigateUp, onNavigateDo
           <Bookmark className={`w-5 h-5 ${saved ? "fill-current" : ""}`} />
         </button>
         <button
+          onClick={handleCast}
+          className="p-3 rounded-full bg-indigo-500/80 hover:bg-indigo-600 backdrop-blur-sm text-white shadow-[0_0_15px_rgba(99,102,241,0.6)]"
+        >
+          <Share2 className="w-5 h-5" />
+        </button>
+        <button
           onClick={handleViewDetails}
           className="p-3 rounded-full bg-secondary/60 backdrop-blur-sm text-secondary-foreground"
         >
           <Play className="w-5 h-5" />
         </button>
         <div className="text-center">
-          <div className={`text-2xl font-display font-bold ${probabilityColor}`}>{tiding.probability}%</div>
+          <div className={`text-2xl font-display font-bold ${isOmen ? 'text-red-500 drop-shadow-[0_0_8px_rgba(220,20,60,0.8)] animate-pulse' : probabilityColor}`}>{tiding.probability}%</div>
           <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Probability</div>
         </div>
       </div>
@@ -144,24 +170,43 @@ const FullscreenTidingCard = ({ tiding, index, total, onNavigateUp, onNavigateDo
         </div>
 
         {/* Market Question */}
-        <div className="border border-primary/20 rounded-lg p-3 bg-secondary/30 backdrop-blur-sm">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="w-3.5 h-3.5 text-primary" />
-            <span className="text-[10px] text-primary uppercase tracking-widest font-display">Prediction Market</span>
+        <div className={`border rounded-lg p-3 backdrop-blur-sm ${isOmen ? 'border-red-500/50 bg-red-950/40' : 'border-primary/20 bg-secondary/30'}`}>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <TrendingUp className={`w-3.5 h-3.5 ${isOmen ? 'text-red-400' : 'text-primary'}`} />
+              <span className={`text-[10px] uppercase tracking-widest font-display ${isOmen ? 'text-red-400' : 'text-primary'}`}>
+                LIVE PREDICTION MARKET
+              </span>
+            </div>
           </div>
-          <p className="text-xs text-foreground mb-2 font-body">{tiding.marketQuestion}</p>
+          <p className="text-xs text-foreground mb-3 font-body font-medium">{tiding.marketQuestion}</p>
           <div className="flex gap-2">
-            <button className="flex-1 bg-probability-high/20 text-probability-high rounded-md py-1.5 text-xs font-semibold">
-              Yes {tiding.marketOdds.yes}%
+            <button 
+              onClick={() => handleBet('yes')}
+              className="flex-1 bg-probability-high/20 hover:bg-probability-high/40 text-probability-high border border-probability-high/30 rounded-md py-2 text-xs font-semibold flex items-center justify-center gap-1 transition-colors"
+            >
+              Buy YES {tiding.marketOdds.yes}%
             </button>
-            <button className="flex-1 bg-probability-low/20 text-probability-low rounded-md py-1.5 text-xs font-semibold">
-              No {tiding.marketOdds.no}%
+            <button 
+              onClick={() => handleBet('no')}
+              className="flex-1 bg-probability-low/20 hover:bg-probability-low/40 text-probability-low border border-probability-low/30 rounded-md py-2 text-xs font-semibold flex items-center justify-center gap-1 transition-colors"
+            >
+              Buy NO {tiding.marketOdds.no}%
             </button>
           </div>
         </div>
 
-        {/* Timestamp */}
-        <p className="text-[10px] text-muted-foreground font-body">{tiding.timestamp}</p>
+        {/* Tip & Timestamp Row */}
+        <div className="flex items-center justify-between mt-2">
+          <p className="text-[10px] text-muted-foreground font-body">{tiding.timestamp}</p>
+          <button 
+            onClick={handleTip}
+            className="flex items-center gap-1 text-[10px] bg-blue-500/20 text-blue-300 border border-blue-500/30 px-2 py-1 rounded-full hover:bg-blue-500/30 transition-colors"
+          >
+            <Coins className="w-3 h-3" />
+            Tip 1 USDC
+          </button>
+        </div>
       </div>
     </div>
   );

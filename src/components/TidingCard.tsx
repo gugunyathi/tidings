@@ -29,6 +29,7 @@ export interface TidingData {
   summary: string;
   image: string;
   videoUrl?: string; // Add optional video support
+  rarity?: "Common" | "Rare" | "Epic" | "Omen"; // Gacha mechanics
   probability: number;
   sources: TidingSource[];
   marketQuestion: string;

@@ -47,12 +47,14 @@ Return ONLY a valid JSON object with this exact structure:
   ],
   "marketQuestion": "Prediction market question about whether this event will escalate (future-tense)",
   "marketOdds": {"yes": 60, "no": 40},
+  "rarity": "Common | Rare | Epic | Omen",
   "voiceover": "10-second cinematic voiceover script (2 sentences max, dramatic)",
   "imagePrompt": "Detailed cinematic image prompt for AI image generation...",
   "videoPrompt": "Detailed prompt for generating a TikTok style vertical looping video in Gemini Veo...",
   "agentNote": "One sentence from the Synthesizer Agent about the pattern detected"
 }
 
+The rarity must be scaled to the event's severity: 'Common' (everyday news), 'Rare' (notable), 'Epic' (historic), 'Omen' (world-altering, severe probability > 90%).
 The probability should reflect genuine cross-tradition consensus (20-95 range).
 The videoPrompt must be very specific for a vertical (9:16) short form video.
 Base this on a REAL news event happening in ${dateStr}.`;
