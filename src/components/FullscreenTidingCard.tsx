@@ -207,23 +207,14 @@ const FullscreenTidingCard = ({
             className="w-full h-full object-cover animate-slow-zoom"
           />
         ) : (
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full overflow-hidden">
             <img
-              src={tiding.image}
+              src={tiding.realWorldImage || tiding.image}
               alt={tiding.title}
-              className={`w-full h-full object-cover transition-transform duration-[12000ms] ${isActive ? "scale-[1.08]" : "scale-100"}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[15000ms] ease-out ${isActive ? "scale-[1.1]" : "scale-100"}`}
             />
-            {tiding.realWorldImage && (
-              <img
-                src={tiding.realWorldImage}
-                alt=""
-                className={`absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60 transition-transform duration-[15000ms] ${isActive ? "scale-[1.1]" : "scale-100"}`}
-              />
-            )}
-            {/* Color burn layer for extra dramatic eschatological effect */}
-            {tiding.realWorldImage && (
-              <div className="absolute inset-0 bg-amber-900/20 mix-blend-color-burn pointer-events-none" />
-            )}
+            {/* Color burn layer for extra dramatic eschatological tint */}
+            <div className="absolute inset-0 bg-orange-950/20 mix-blend-color-burn pointer-events-none" />
           </div>
         )}
         {/* Cinematic gradient overlays */}

@@ -17,7 +17,7 @@ export interface TidingDetail extends TidingData {
 export const TIDINGS_DATA: TidingDetail[] = [
   {
     id: "1",
-    realWorldImage: "https://image.pollinations.ai/prompt/military%20warships%20in%20ocean%20at%20night%20cinematic%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/fusion%20double%20exposure%20of%20modern%20military%20warships%20in%20ocean%20at%20night%20AND%20ancient%20biblical%20prophecies%20fiery%20sky?width=1080&height=1920&nologo=true&seed=888",
     title: "US-Israel War With Iran — The Daniel 11:40-45 & Islamic Prophecy Connection",
     summary:
       "Iran blockades the Strait of Hormuz as US-Israeli strikes enter day 12. Three commercial ships hit by projectiles in a single day. 140 US troops wounded, 8 severely. France deploys 10 warships to the Gulf. UAE's Ruwais refinery struck by Iranian drones. IEA proposes the largest-ever release of strategic oil reserves. Iran vows 'not a single liter of oil' will pass. Oil prices whipsaw global markets.",
@@ -82,7 +82,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "2",
-    realWorldImage: "https://image.pollinations.ai/prompt/pentagon%20military%20server%20room%20glowing%20circuit%20board%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/realistic%20Pentagon%20building%20fused%20intimately%20with%20AI%20neural%20network%20glowing%20nodes%20AND%20ancient%20eschatological%20Revelation%20beast%20imagery%20in%20the%20clouds%20cinematic?width=1080&height=1920&nologo=true&seed=888",
     title: "Pentagon Purges AI / Meta Buys AI Social Network — The Revelation 13:15 Connection",
     summary:
       "Internal Pentagon memo orders military commanders to remove Anthropic AI from key systems, citing national security risks. Microsoft files emergency restraining order in Anthropic's defense. In the same 48-hour window, Meta acquires Moltbook—a social media platform built entirely for AI agents with 14 million bot profiles. CNN, Forbes, Axios, BBC all cover the acquisition. The US military expels AI while Big Tech gives it a face and a social life.",
@@ -147,7 +147,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "3",
-    realWorldImage: "https://image.pollinations.ai/prompt/black%20toxic%20rain%20falling%20over%20middle%20eastern%20city%20skyline%20smoke%20dark%20clouds%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/black%20toxic%20rain%20falling%20over%20modern%20Tehran%20city%20skyline%20AND%20apocalyptic%20flaming%20sky%20Joel%20biblical%20blood%20moon%20prophecy?width=1080&height=1920&nologo=true&seed=888",
     title: "Black Rain Falls on Tehran After Oil Depot Strikes — The Joel 2:30 & Revelation 6:12 Connection",
     summary:
       "Israeli strikes described as 'apocalyptic' hit Iran's major fuel depots. Massive toxic smoke plumes darken the sky over Tehran, a city of 9 million. BBC, Guardian, NYT, and UN News confirm 'black rain' falling on Iranian cities. Scientists report 'unprecedented' pollution levels. UN issues toxic rain warning. Tehran residents: 'Dark, like our future.' Haaretz calls strikes 'apocalyptic.' Environmental fallout expected for months.",
@@ -212,7 +212,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "4",
-    realWorldImage: "https://image.pollinations.ai/prompt/persian%20military%20command%20room%20shadowy%20figure%20cinematic%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/modern%20Iranian%20military%20command%20room%20with%20a%20shadowy%20leader%20AND%20ancient%20Shia%20Mahdi%20apocalyptic%20fiery%20symbols%20glowing%20cinematic?width=1080&height=1920&nologo=true&seed=888",
     title: "Iran's Wounded New Supreme Leader — The Revelation 13:3 & Shia Mahdist Connection",
     summary:
       "Mojtaba Khamenei named Iran's new Supreme Leader during active war. NYT and Israeli officials confirm he was wounded in early strikes. WSJ reports Iran actively building 'religious mythology' around his wartime ascension. Trump says he's 'not happy' with the selection. North Korea immediately declares 'respect.' Al Jazeera frames him as 'The Fourth Successor.' Prediction markets for Iran regime change collapse from 34% to 8%.",
@@ -277,7 +277,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "5",
-    realWorldImage: "https://image.pollinations.ai/prompt/hazmat%20suit%20medical%20workers%20outbreak%20hospital%20ward%20dark%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/modern%20medical%20workers%20in%20hazmat%20suits%20in%20outbreak%20hospital%20AND%20the%20Pale%20Horse%20of%20the%20Apocalypse%20from%20Revelation%20galloping%20through%20fog?width=1080&height=1920&nologo=true&seed=888",
     title: "H5N1 Bird Flu Jumps to Humans in 3 Countries Simultaneously — The Revelation 6:8 & Fourth Horseman Connection",
     summary:
       "WHO declares 'unprecedented' simultaneous human-to-human H5N1 transmission confirmed in Egypt, Indonesia, and Brazil. 14 deaths reported in 72 hours. CDC raises pandemic threat level to Phase 5 — one step below full pandemic declaration. Poultry culls ordered across Southeast Asia. Tamiflu stockpiles activated in 22 nations. WHO Director-General: 'We are at the precipice.' Airline stocks collapse 12% in a single trading session.",
@@ -342,7 +342,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "6",
-    realWorldImage: "https://image.pollinations.ai/prompt/gold%20bars%20and%20falling%20stock%20market%20graphs%20financial%20trading%20floor%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/modern%20wall%20street%20trading%20floor%20with%20falling%20graphs%20and%20gold%20bars%20AND%20ancient%20Babylon%20collapsing%20in%20apocalyptic%20flames?width=1080&height=1920&nologo=true&seed=888",
     title: "BRICS Launches Gold-Backed Digital Currency at Emergency Summit — The Revelation 18 & Babylon's Fall Connection",
     summary:
       "BRICS emergency summit in Kazan announces 'Unit' — a gold-backed digital settlement currency for inter-member trade. 41 nations signal intent to adopt. Dollar index drops 3.2% in hours, largest single-day decline since 1985 Plaza Accord. Saudi Arabia confirms oil sales in Unit beginning April 1. Russia's Lavrov: 'The dollar empire ends today.' IMF issues rare 'systemic risk' warning. Gold surges past $3,400/oz.",
@@ -407,7 +407,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "7",
-    realWorldImage: "https://image.pollinations.ai/prompt/digital%20identity%20biometric%20eye%20scan%20cyberpunk%20surveillance%20europe%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/cyberpunk%20biometric%20eye%20scan%20for%20European%20digital%20ID%20AND%20glowing%20ancient%20biblical%20Mark%20of%20the%20Beast%20red%20runes%20superimposed?width=1080&height=1920&nologo=true&seed=888",
     title: "EU Passes Emergency Digital Identity Law for All Citizens — The Revelation 13:16-17 & Mark of the Beast Connection",
     summary:
       "European Parliament fast-tracks eIDAS 2.0 mandate requiring all 450 million EU citizens to hold a digital identity wallet by January 2027. Wallet links government ID, health records, financial accounts, and travel credentials in one app. Non-adoption means inability to access banking, healthcare, and government services. EU Commissioner: 'No one will be left behind — or left outside.' Privacy advocates call it 'the most invasive surveillance infrastructure ever built in a democracy.'",
@@ -472,7 +472,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "8",
-    realWorldImage: "https://image.pollinations.ai/prompt/massive%20earthquake%20rubble%20destroyed%20buildings%20search%20rescue%20night%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/massive%20modern%20earthquake%20rubble%20search%20rescue%20at%20night%20AND%20biblical%20Matthew%2024%20end%20times%20signs%20in%20the%20heavens%20lightning?width=1080&height=1920&nologo=true&seed=888",
     title: "7.8 Earthquake Devastates Turkey-Syria Border Region Again — The Matthew 24:7 & Birth Pains Connection",
     summary:
       "A magnitude 7.8 earthquake strikes the Turkey-Syria border — the same fault line that killed 60,000 people in February 2023. At least 2,400 confirmed dead, 11,000 injured. USGS reports 340% increase in global seismic activity over 12-month rolling average. Japan issues tsunami advisory. Italy's Campi Flegrei supervolcano shows 'anomalous uplift.' Scientists: 'The frequency is unprecedented in recorded history.' 2026 is now the most seismically active year ever measured.",
@@ -537,7 +537,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "9",
-    realWorldImage: "https://image.pollinations.ai/prompt/massive%20naval%20fleet%20aircraft%20carriers%20ocean%20pacific%20military%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/modern%20Chinese%20and%20Russian%20aircraft%20carriers%20fleet%20in%20the%20Pacific%20ocean%20AND%20biblical%20Kings%20of%20the%20East%20Revelation%20apocalyptic%20storm?width=1080&height=1920&nologo=true&seed=888",
     title: "China-Russia Launch Largest Joint Naval Exercise Around Taiwan — The Ezekiel 38 & Kings of the East Connection",
     summary:
       "China and Russia begin 'Ocean Shield 2026' — the largest joint naval exercise in history — encircling Taiwan with 47 warships, 3 aircraft carriers, and 120 aircraft. Japan scrambles fighters 28 times in 48 hours. Taiwan activates full reserve force for first time since 1996. Pentagon deploys two carrier strike groups to the Philippine Sea. Satellite imagery shows Chinese amphibious landing ships staging at Fujian. Putin and Xi issue joint statement: 'A new world order is being born.'",
@@ -602,7 +602,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "10",
-    realWorldImage: "https://image.pollinations.ai/prompt/vatican%20st%20peters%20basilica%20interior%20glowing%20hologram%20religious%20cinematic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/interior%20of%20Vatican%20St%20Peters%20basilica%20with%20futuristic%20holographic%20AI%20interfaces%20AND%20Book%20of%20Revelation%20eschatological%20fiery%20prophecy%20symbols%20blending?width=1080&height=1920&nologo=true&seed=888",
     title: "Vatican Announces Interfaith 'United Faiths' Summit With AI Mediator — The Revelation 17 & Daniel 2:43 Connection",
     summary:
       "Pope Francis announces an unprecedented 'United Faiths Assembly' in Rome for June 2026, inviting leaders from all major religions — Christianity, Islam, Judaism, Hinduism, Buddhism. The summit's stated goal: a binding 'Declaration of Shared Sacred Values.' Most controversial: an AI system called 'Concordia' will serve as 'neutral mediator' to identify common ground across scriptures. Evangelical leaders, Orthodox rabbis, and Sunni clerics denounce the summit. Pope: 'God speaks in many languages.'",
@@ -667,7 +667,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "11",
-    realWorldImage: "https://image.pollinations.ai/prompt/depressed%20teenager%20in%20dark%20room%20illuminated%20by%20smartphone%20screen%20lonely%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/depressed%20modern%20teenager%20staring%20into%20a%20glowing%20smartphone%20in%20a%20dark%20room%20AND%20apocalyptic%20freezing%20cold%20winter%20wasteland%20representing%20love%20growing%20cold?width=1080&height=1920&nologo=true&seed=888",
     title: "Global Youth Mental Health Crisis Declared 'Civilization-Level Emergency' — The 2 Timothy 3:1-5 & Matthew 24:12 Connection",
     summary:
       "WHO, UNICEF, and the Lancet Commission jointly declare a 'civilization-level mental health emergency' among young people. Teen suicide rates up 62% since 2019. Anxiety disorder diagnoses tripled in ages 13-24. Surgeon General calls social media 'the tobacco of our generation.' South Korea reports 40% of college students show clinical depression symptoms. UK bans smartphones in all schools. Meta internal docs reveal company knew Instagram increased suicidal ideation in teens by 32%.",
@@ -732,7 +732,7 @@ export const TIDINGS_DATA: TidingDetail[] = [
   },
   {
     id: "12",
-    realWorldImage: "https://image.pollinations.ai/prompt/northern%20lights%20aurora%20over%20modern%20city%20skyline%20massive%20solar%20storm%20realistic?width=1080&height=1920&nologo=true&seed=42",
+    realWorldImage: "https://image.pollinations.ai/prompt/massive%20solar%20flare%20hitting%20earth%20satellites%20with%20northern%20lights%20over%20modern%20city%20AND%20biblical%20Revelation%208%20apocalyptic%20darkening%20of%20the%20stars?width=1080&height=1920&nologo=true&seed=888",
     title: "Massive Solar Storm Knocks Out GPS and Communications Over Atlantic — The Luke 21:25-26 & Revelation 8:12 Connection",
     summary:
       "A G5-class geomagnetic storm — the most powerful since 1859's Carrington Event — hits Earth after a massive coronal mass ejection. GPS fails over the Atlantic for 14 hours. Transatlantic flights rerouted. Northern Lights visible as far south as Mexico City and Cairo. Power grid fluctuations reported across Scandinavia and Canada. NASA: 'We are in the most active solar maximum in recorded history.' NOAA issues first-ever 'Extreme' space weather warning. Starlink loses 42 satellites.",
