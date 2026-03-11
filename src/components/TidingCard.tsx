@@ -28,6 +28,7 @@ export interface TidingData {
   title: string;
   summary: string;
   image: string;
+  realWorldImage?: string; // High-res real world news image to blend with eschatological image
   videoUrl?: string; // Add optional video support
   rarity?: "Common" | "Rare" | "Epic" | "Omen"; // Gacha mechanics
   probability: number;
