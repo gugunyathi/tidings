@@ -1,11 +1,16 @@
-import { Filter, Scroll, Swords, Globe, BookOpen } from "lucide-react";
+import { Filter, Scroll, Swords, Globe, BookOpen, Cpu, CloudLightning, DollarSign, Church, Heart, Sun } from "lucide-react";
 import { useState } from "react";
 
 const categories = [
   { id: "all", label: "All Tidings", icon: Scroll },
   { id: "geopolitical", label: "Geopolitical", icon: Globe },
-  { id: "eschatological", label: "Eschatological", icon: BookOpen },
   { id: "conflict", label: "Conflict", icon: Swords },
+  { id: "technology", label: "Technology", icon: Cpu },
+  { id: "natural", label: "Natural Signs", icon: CloudLightning },
+  { id: "economic", label: "Economic", icon: DollarSign },
+  { id: "spiritual", label: "Spiritual", icon: Church },
+  { id: "social", label: "Social", icon: Heart },
+  { id: "cosmic", label: "Cosmic", icon: Sun },
 ];
 
 interface CategoryFilterProps {
